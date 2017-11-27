@@ -8,7 +8,11 @@
 
 
 <!--The header links links -->
-<?php include_once("header.php") ?>
+<?php
+
+
+
+include_once("header.php") ?>
 
 
 <h1> Welcome to the store! </h1>

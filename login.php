@@ -1,28 +1,16 @@
-<?php
-session_start();
-//if alreadu connected no need to be here
-if(isset($_SESSION["admin"]))
-{
-  header("LOACTION: index.php");
-  exit();
-}
- ?>
-
-
-
 
 <!DOCTYPE html>
 <html>
 
 <title>WebShop</title>
 <body>
+<?php include_once("header.php") ?>
+
+<h1>login</h1>
 
 
-<h1>Admin login</h1>
 
-
-
-<form method="post" action="admin_login.php">
+<form method="post" action="login.php">
   <div class="container">
     <label><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="uname" required>
@@ -35,29 +23,37 @@ if(isset($_SESSION["admin"]))
   </div>
 </form>
 
-<form action="../index.php">
-  <input type="submit" value="cancel">
-
-</form>
 
 </body>
 </html>
 
 <?php
 //connect to db
-require "../connectsql.php";
+require "connectsql.php";
+
+
+session_start();
+//If session is active means someone is logged in
+//either auto logout other use or ask them to
+//so that the session is killed
+if(isset($_SESSION["user"]))
+{
+  echo "Please sign out";
+  exit();
+}
+
 
 //check the login
-if(isset($_POST["uname"]) && isset($_POST["psw"]))
+else if(isset($_POST["uname"]) && isset($_POST["psw"]))
 {
-  $admin = $_POST["uname"];
-  $adminpass= $_POST["psw"];
+  $user = $_POST["uname"];
+  $userpass= $_POST["psw"];
   //check if in database
   // $sql = mysql_query("SELECT id FROM admin WHERE
   //   username = 'test' AND password='test123'");
 
-  $sql = "SELECT id FROM admin WHERE
-  username = '$admin' AND password='$adminpass'";
+  $sql = "SELECT password FROM users WHERE
+  username = '$user'";
   //send query
   $result = $connect->query($sql);
 
@@ -65,19 +61,16 @@ if(isset($_POST["uname"]) && isset($_POST["psw"]))
 
   if($result->num_rows>0)
   {
-    //get id value
-    while($row = $result->fetch_assoc())
+    while($row=$result->fetch_assoc())
     {
-      $id = $row["id"];
-      echo $id;
+      if($row["password"]==$userpass)
+      {
+        //set session values
+        $_SESSION["user"] = $user;
+        $_SESSION["userpass"] = $userpass;
+        echo "Signed in!";
+      }
     }
-
-    //set session values
-    $_SESSION["id"] = $id;
-    $_SESSION["admin"] = $admin;
-    $_SESSION["adminpass"] = $adminpass;
-    header("LOCATION: index.php");
-
   }
   else
   {

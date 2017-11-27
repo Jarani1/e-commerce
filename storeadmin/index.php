@@ -30,7 +30,7 @@ $result = $connect->query($sql);
 
 
 //check returned rows
-if($result==0)
+if(!($result->num_rows >0))
 {
   //user doesn't exist
   exit();

@@ -20,6 +20,12 @@
 
  click = insta add to cart????
 
+ new notes: extract name
+ put in variables.
+ link name.
+ press and it goes to shopping cart.
+ then press cart and therE boiii
+
 
 
  -->
@@ -27,6 +33,7 @@
 
 <h2>Current Items</h2>
 <?php
+
 require "connectsql.php";
 
 $sql = "SELECT * FROM products";
