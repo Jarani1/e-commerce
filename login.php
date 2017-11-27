@@ -4,7 +4,20 @@
 
 <title>WebShop</title>
 <body>
+
 <?php include_once("header.php") ?>
+
+
+<?php
+session_start();
+
+if(isset($_SESSION["user"]))
+{
+  echo "<br>";
+  echo " Current user session: ". $_SESSION["user"]."<br>";
+}
+
+ ?>
 
 <h1>login</h1>
 
@@ -32,20 +45,25 @@
 require "connectsql.php";
 
 
-session_start();
-//If session is active means someone is logged in
-//either auto logout other use or ask them to
-//so that the session is killed
-if(isset($_SESSION["user"]))
+//session_start();
+
+//check if already signed in or kill other session
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-  echo "Please sign out";
-  exit();
+  if(isset($_SESSION["user"]))
+  {
+    echo "Someone is already signed in!";
+    exit();
+  }
+
 }
+
 
 
 //check the login
 else if(isset($_POST["uname"]) && isset($_POST["psw"]))
 {
+
   $user = $_POST["uname"];
   $userpass= $_POST["psw"];
   //check if in database
@@ -68,6 +86,7 @@ else if(isset($_POST["uname"]) && isset($_POST["psw"]))
         //set session values
         $_SESSION["user"] = $user;
         $_SESSION["userpass"] = $userpass;
+        echo "new session var: ". $_SESSION["user"]."<br>";
         echo "Signed in!";
       }
     }
