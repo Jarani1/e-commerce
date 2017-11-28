@@ -12,7 +12,7 @@ session_start();
 
 
 
- <form method="post" action="index.php">
+ <form method="post" action="logout.php">
    <input type="submit" value="Sign out">
 
  </form>
@@ -26,6 +26,8 @@ session_start();
    session_destroy();
 
    echo "Signed out!";
+
+   header("LOCATION: ../index.php");
 
  }
   ?>

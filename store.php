@@ -45,7 +45,9 @@ if($result->num_rows >0)
   {
     echo "id: ".$row["id"]. " - Name: ". $row["name"]. " - Price: ".
     $row["price"]. " - Quantity: ". $row["quantity"]. " - Category: ".
-    $row["category"]."<br>";
+    $row["category"];
+    echo "<a href='cart.php?id=" . $row['id'] ."'> Add to cart</a>";
+
   }
 }else
 {
