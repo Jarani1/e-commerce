@@ -27,6 +27,13 @@
  then press cart and therE boiii
 
 
+UPDATE::
+
+Set all in store when clicked the array is updated
+You still stay on the page. When you go to cart the array
+is loaded in. And everything and it's quant is loaded out
+
+
 
  -->
 
@@ -46,7 +53,7 @@ if($result->num_rows >0)
     echo "id: ".$row["id"]. " - Name: ". $row["name"]. " - Price: ".
     $row["price"]. " - Quantity: ". $row["quantity"]. " - Category: ".
     $row["category"];
-    echo "<a href='cart.php?id=" . $row['id'] ."'> Add to cart</a>";
+    echo "<a href='cart.php?id=" . $row['id'] ."'> Add to cart</a>"; //real nice
 
   }
 }else
