@@ -1,4 +1,6 @@
-
+<?php
+session_start();
+ ?>
 <!DOCTYPE html>
 <html>
 
@@ -35,7 +37,82 @@ is loaded in. And everything and it's quant is loaded out
 
 
 
+Another block right here add the you know array stack up the cart stuff
+ya dig
+
+So make array check GET and add
+if exist increment
+
  -->
+
+<?php
+require "connectsql.php";
+
+if(isset($_GET['id']))
+{
+  if(isset($_SESSION['user']))
+  {
+    $userID = $_SESSION['user'];
+    $productID = $_GET['id'];
+
+    //check if productID is already in user cart
+    $sql1= "SELECT productID FROM cart WHERE userID ='$userID'";
+
+
+    $result = $connect->query($sql1);
+
+    //handle returned rows if there are any lol
+    if($result->num_rows>0)
+    {
+      while($row=$result->fetch_assoc())
+      {
+        //if already in cart incremnet
+        if($row["productID"]==$productID)
+        {
+          // just increment existing item with 1
+          $sql2 ="UPDATE cart SET quantity = quantity +1
+           WHERE userID = 'testo'";
+           if($connect->query($sql2)==TRUE)
+           {
+             echo "Item added to cart";
+           }else{
+             echo "Error: ". $sql . "<br>" . $connect->error;
+           }
+        }
+        //if no add new entry
+        else
+        {
+          $sql = "INSERT INTO cart (userID, productID, quantity) VALUES('$userID',
+            '$productID',1)";
+          if($connect->query($sql)==TRUE){
+            echo "Item added to cart";
+          }else{
+            echo "Error: ". $sql . "<br>" . $connect->error;
+          }
+        }
+      }
+    }else {
+      $sql = "INSERT INTO cart (userID, productID, quantity) VALUES('$userID',
+        '$productID',1)";
+      if($connect->query($sql)==TRUE){
+        echo "Item added to cart";
+      }else{
+        echo "Error: ". $sql . "<br>" . $connect->error;
+      }
+
+    }
+
+
+
+
+  }
+  else {
+    echo "sign in, stupid ass bitch";
+  }
+}
+
+
+ ?>
 
 
 <h2>Current Items</h2>
@@ -53,7 +130,7 @@ if($result->num_rows >0)
     echo "id: ".$row["id"]. " - Name: ". $row["name"]. " - Price: ".
     $row["price"]. " - Quantity: ". $row["quantity"]. " - Category: ".
     $row["category"];
-    echo "<a href='cart.php?id=" . $row['id'] ."'> Add to cart</a>"; //real nice
+    echo "<a href='store.php?id=" . $row['id'] ."'> Add to cart</a>"; //real nice
 
   }
 }else

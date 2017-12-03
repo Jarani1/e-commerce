@@ -1,4 +1,5 @@
-
+<?php
+session_start(); ?>
 <!DOCTYPE html>
 <html>
 
@@ -9,7 +10,7 @@
 
 
 <?php
-session_start();
+
 
 if(isset($_SESSION["user"]))
 {
@@ -48,16 +49,12 @@ require "connectsql.php";
 //session_start();
 
 //check if already signed in or kill other session
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
+
+if(isset($_SESSION["user"]))
 {
-  if(isset($_SESSION["user"]))
-  {
-    echo "Someone is already signed in!";
-    exit();
-  }
-
+  echo "Someone is already signed in!";
+  exit();
 }
-
 
 
 //check the login
