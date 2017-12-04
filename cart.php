@@ -12,10 +12,34 @@
 
 <h1> Shopping Cart  </h1>
 
+
+<?php
+
+
+if(isset($_GET['req']))
+{
+  if($_GET['req']==1)
+  {
+    //empty cart
+    $userID = $_SESSION['user'];
+    $sql = "DELETE FROM cart WHERE userID ='$userID'";
+    if($connect->query($sql)==TRUE)
+    {
+      echo "Cart Empty";
+    }else
+    {
+      echo "Error: ". $sql . "<br>" . $connect->error;
+    }
+  }
+}
+
+ ?>
 <!--
 Display cart
   -->
 <?php
+
+
 require "connectsql.php";
 if(isset($_SESSION['user']))
 {
@@ -52,17 +76,16 @@ if(isset($_SESSION['user']))
       //multiply quant with price
       $qprice = $prodprice * $prodQ;
       echo "Name: ".$prodname." - quantity: ".$prodQ
-      . " - total: ". $qprice."$";
+      . " - total: ". $qprice."$" ;
+
     }
   }else
   {
-    echo "Inventory is empty.";
+    echo "Cart Empty.";
   }
+  $empty = 1;
+  echo "<a href='store.php?req=" . $empty ."'> Empty cart</a>";
 }
-
  ?>
-
-
-
 </body>
 </html>
