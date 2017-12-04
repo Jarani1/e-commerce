@@ -15,21 +15,18 @@
 
 <?php
 require "connectsql.php";
-
-if(isset($_GET['req']))
+//$_GET['req']
+if(isset($_GET['remove']))
 {
-  if($_GET['req']==1)
+  //empty cart
+  $userID = $_SESSION['user'];
+  $sql = "DELETE FROM cart WHERE userID ='$userID'";
+  if($connect->query($sql)==TRUE)
   {
-    //empty cart
-    $userID = $_SESSION['user'];
-    $sql = "DELETE FROM cart WHERE userID ='$userID'";
-    if($connect->query($sql)==TRUE)
-    {
-      echo "Cart Empty";
-    }else
-    {
-      echo "Error: ". $sql . "<br>" . $connect->error;
-    }
+    echo "Cart Empty";
+  }else
+  {
+    echo "Error: ". $sql . "<br>" . $connect->error;
   }
 }
 
@@ -41,7 +38,7 @@ Display cart
 
 
 require "connectsql.php";
-if(isset($_SESSION['user']) && !(isset($_GET['req'])))
+if(isset($_SESSION['user']) && !(isset($_GET['remove'])))
 {
   $userID = $_SESSION['user'];
   //everyrow that has this user id in cart print it.
@@ -85,7 +82,14 @@ if(isset($_SESSION['user']) && !(isset($_GET['req'])))
   }
   $empty = 1;
   echo "<a href='cart.php?req=" . $empty ."'> Empty cart</a>";
+
 }
  ?>
+
+
+ <form action="cart.php">
+   <input type="submit" name="remove" value="Remove All">
+ </form>
+
 </body>
 </html>
