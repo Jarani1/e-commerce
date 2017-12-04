@@ -14,7 +14,7 @@
 
 
 <?php
-
+require "connectsql.php";
 
 if(isset($_GET['req']))
 {
@@ -41,7 +41,7 @@ Display cart
 
 
 require "connectsql.php";
-if(isset($_SESSION['user']))
+if(isset($_SESSION['user']) && !(isset($_GET['req'])))
 {
   $userID = $_SESSION['user'];
   //everyrow that has this user id in cart print it.
@@ -84,7 +84,7 @@ if(isset($_SESSION['user']))
     echo "Cart Empty.";
   }
   $empty = 1;
-  echo "<a href='store.php?req=" . $empty ."'> Empty cart</a>";
+  echo "<a href='cart.php?req=" . $empty ."'> Empty cart</a>";
 }
  ?>
 </body>

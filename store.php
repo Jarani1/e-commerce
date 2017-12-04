@@ -81,8 +81,21 @@ if(isset($_GET['id']))
     {
       echo "Out of stock!";
     }
+
+    //get user cart quant aswell
+
+    $sqluser = "SELECT quantity FROM cart WHERE userID ='$userID'";
+    $resultuser = $connect->query($sqluser);
+    if($resultuser->num_rows>0)
+    {
+      while($row=$resultuser->fetch_assoc())
+      {
+        $GLOBALS['uquant'] = $row['quantity'];
+      }
+    }
+
     //client wants more than in database say no
-    if($_SESSION['count']>$dquant)
+    if($uquant==$dquant)
     {
       echo "Out of stock!";
     }else
@@ -103,7 +116,7 @@ if(isset($_GET['id']))
           if($row["productID"]==$productID)
           {
             // just increment existing item with 1 if not bigger than dquant
-            //get the user cart quant 
+            //get the user cart
             $sql2 ="UPDATE cart SET quantity = quantity +1
              WHERE userID = 'testo'";
              if($connect->query($sql2)==TRUE)
