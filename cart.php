@@ -74,22 +74,24 @@ if(isset($_SESSION['user']) && !(isset($_GET['remove'])))
       $qprice = $prodprice * $prodQ;
       echo "Name: ".$prodname." - quantity: ".$prodQ
       . " - total: ". $qprice."$" ;
+      echo "<br>";
 
     }
   }else
   {
     echo "Cart Empty.";
   }
-  $empty = 1;
-  echo "<a href='cart.php?req=" . $empty ."'> Empty cart</a>";
-
 }
  ?>
-
 
  <form action="cart.php">
    <input type="submit" name="remove" value="Remove All">
  </form>
+<br>
+<form action="checkout.php">
+  <input type="submit" name="check" value="checkout">
+</form>
+
 
 </body>
 </html>
