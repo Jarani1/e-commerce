@@ -23,6 +23,7 @@ if(isset($_GET['remove']))
   $sql = "DELETE FROM cart WHERE userID ='$userID'";
   if($connect->query($sql)==TRUE)
   {
+    $_SESSION['total']=0;
     echo "Cart Empty";
   }else
   {
@@ -81,6 +82,9 @@ if(isset($_SESSION['user']) && !(isset($_GET['remove'])))
   {
     echo "Cart Empty.";
   }
+
+  //print total
+  echo "<br>";
 }
  ?>
 

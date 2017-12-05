@@ -14,36 +14,6 @@ session_start();
 
 <h1> Store </h1>
 
-<!--
-
- Want a list. Want name and price .
-
- File for every item??????
-
- click = insta add to cart????
-
- new notes: extract name
- put in variables.
- link name.
- press and it goes to shopping cart.
- then press cart and therE boiii
-
-
-UPDATE::
-
-Set all in store when clicked the array is updated
-You still stay on the page. When you go to cart the array
-is loaded in. And everything and it's quant is loaded out
-
-
-
-Another block right here add the you know array stack up the cart stuff
-ya dig
-
-So make array check GET and add
-if exist increment
-
- -->
 
 
 <?php
@@ -59,6 +29,7 @@ if(isset($_GET['id']))
     $userID = $_SESSION['user'];
     $productID = $_GET['id'];
     $_SESSION['match']=0;
+    $_SESSION['total'];
 
     $sqlc = "SELECT quantity FROM products WHERE id = '$productID'";
 

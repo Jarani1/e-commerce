@@ -55,6 +55,7 @@ if($result->num_rows >0)
     $qprice = $prodprice * $prodQ;
     echo "Name: ".$prodname." - quantity: ".$prodQ
     . " - total: ". $qprice."$" ;
+    echo "<br>";
 
   }
 }else
