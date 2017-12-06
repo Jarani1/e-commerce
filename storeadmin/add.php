@@ -22,17 +22,47 @@
   <br>
 </form>
 <br>
-<form action="inventory.php">
-  <input type="submit" value="back">
 
+
+
+
+
+
+<h1>Add existing item</h1>
+
+<form action="add.php" method="post">
+  <br>Product ID:<br>
+  <input type="text" name="id" required="required">
+  <br>Quantity:<br>
+  <input type="text" name="quant" required="required">
+  <br><br>
+  <input type="submit" name="adde" value="Add">
+  <br>
 </form>
-
+<br>
 
 <!-- Current items??  -->
 
+<h2>Current Items</h2>
 
-</body>
-</html>
+
+
+<?php
+require "../connectsql.php";
+
+if(isset($_POST['adde']))
+{
+  $id = $_POST['id'];
+  $quantity = $_POST['quant'];
+
+  $sql_update = "UPDATE products SET quantity=(quantity + '$quantity') WHERE
+  products.id = '$id' ";
+
+  $connect->query($sql_update);
+}
+
+
+ ?>
 
 <?php
 // Add item to database
@@ -40,10 +70,6 @@ require "../connectsql.php";
 
 if(isset($_POST['add']))
 {
-  //if already exist just add quantity
-  //UPDATE `products` SET `quantity` = '5' WHERE `products`.`id` = 11;
-
-
 
   $sql = "INSERT INTO products (quantity,name,price,category)
    VALUES('$_POST[quantity]','$_POST[name]','$_POST[price]','$_POST[category]')";
@@ -54,8 +80,31 @@ if(isset($_POST['add']))
    }
 }
 $connect->close();
-
-
-
-
  ?>
+ <?php
+ require "../connectsql.php";
+
+ $sql = "SELECT * FROM products";
+ $result = $connect->query($sql);
+
+ if($result->num_rows >0)
+ {
+   while($row=$result->fetch_assoc())
+   {
+     echo "id: ".$row["id"]. " - Name: ". $row["name"]. " - Price: ".
+     $row["price"]. " - Quantity: ". $row["quantity"]. " - Category: ".
+     $row["category"]."<br>";
+   }
+ }else
+ {
+   echo "Inventory is empty.";
+ }
+
+  ?>
+  <br><br>
+  <form action="inventory.php">
+    <input type="submit" value="back">
+
+  </form>
+ </body>
+ </html>

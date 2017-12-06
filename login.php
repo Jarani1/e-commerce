@@ -76,6 +76,10 @@ else if(isset($_POST["uname"]) && isset($_POST["psw"]))
         echo "new session var: ". $_SESSION["user"]."<br>";
         echo "Signed in!";
       }
+      else {
+        echo 'Wrong username or password, try again';
+
+      }
     }
   }
   else

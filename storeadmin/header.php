@@ -10,6 +10,7 @@
 <a href="../store.php">store</a>
 <a href="../cart.php">cart</a>
 <a href="inventory.php">inventory</a>
+<a href="orders.php">orders</a>
 <a href="logout.php">logout</a>
 
 

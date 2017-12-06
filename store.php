@@ -151,7 +151,9 @@ if($result->num_rows >0)
     echo "id: ".$row["id"]. " - Name: ". $row["name"]. " - Price: ".
     $row["price"]. " - Quantity: ". $row["quantity"]. " - Category: ".
     $row["category"];
-    echo "<a href='store.php?id=" . $row['id'] ."'> Add to cart</a>"; //real nice
+    echo "<a href='store.php?id=" . $row['id'] ."'> Add to cart</a>";
+    echo " or read ";
+    echo "<a href='comments.php?id=" . $row['id'] ."'> Comments </a>"; //real nice
     echo "<br>";
   }
 }else
