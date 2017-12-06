@@ -88,13 +88,17 @@ if(isset($_SESSION['user']) && !(isset($_GET['remove'])))
 }
  ?>
 
+ <form action="checkout.php">
+   <input type="submit" name="check" value="checkout">
+ </form>
+
+ <br>
+
  <form action="cart.php">
    <input type="submit" name="remove" value="Remove All">
  </form>
 <br>
-<form action="checkout.php">
-  <input type="submit" name="check" value="checkout">
-</form>
+
 
 
 </body>

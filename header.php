@@ -12,6 +12,7 @@
 <a href="login.php">login</a>
 <a href="logout.php">logout</a>
 <a href="register.php">register</a>
+<a href="myaccount.php">My Account</a>
 <a href="/storeadmin/index.php">admin</a>
 
 

@@ -9,16 +9,6 @@ session_start(); ?>
 <?php include_once("header.php") ?>
 
 
-<?php
-
-
-if(isset($_SESSION["user"]))
-{
-  echo "<br>";
-  echo " Current user session: ". $_SESSION["user"]."<br>";
-}
-
- ?>
 
 <h1>login</h1>
 
@@ -97,3 +87,15 @@ else if(isset($_POST["uname"]) && isset($_POST["psw"]))
 
 
  ?>
+
+
+ <?php
+
+
+ if(isset($_SESSION["user"]))
+ {
+   echo "<br>";
+   echo " Current user session: ". $_SESSION["user"]."<br>";
+ }
+
+  ?>
