@@ -40,6 +40,11 @@ require "../connectsql.php";
 
 if(isset($_POST['add']))
 {
+  //if already exist just add quantity
+  //UPDATE `products` SET `quantity` = '5' WHERE `products`.`id` = 11;
+
+
+
   $sql = "INSERT INTO products (quantity,name,price,category)
    VALUES('$_POST[quantity]','$_POST[name]','$_POST[price]','$_POST[category]')";
    if($connect->query($sql)==TRUE){

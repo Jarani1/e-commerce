@@ -29,7 +29,6 @@ if(isset($_GET['id']))
     $userID = $_SESSION['user'];
     $productID = $_GET['id'];
     $_SESSION['match']=0;
-    $_SESSION['total'];
 
     $sqlc = "SELECT quantity FROM products WHERE id = '$productID'";
 
@@ -64,7 +63,7 @@ if(isset($_GET['id']))
     }
 
     //client wants more than in database say no
-    if($uquant==$dquant)
+    if($uquant>=$dquant)
     {
       echo "Out of stock!";
     }else
