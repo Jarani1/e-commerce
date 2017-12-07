@@ -74,10 +74,22 @@ if(isset($_POST['add']))
   $sql = "INSERT INTO products (quantity,name,price,category)
    VALUES('$_POST[quantity]','$_POST[name]','$_POST[price]','$_POST[category]')";
    if($connect->query($sql)==TRUE){
-     echo "product added";
+     $GLOBALS['last_id'] = $connect->insert_id;
+     echo "check out last id ". $GLOBALS['last_id'];
    }else{
      echo "Error: ". $sql . "<br>" . $connect->error;
    }
+
+   //also init in prod rating
+   $initID = $GLOBALS['last_id'];
+   $sql_init = "INSERT INTO products_rating (id) VALUES
+   ('$initID')";
+   if($connect->query($sql_init)==TRUE)
+   {
+     echo "last_id: ". $initID;
+   }
+
+
 }
 $connect->close();
  ?>
