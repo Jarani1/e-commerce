@@ -52,7 +52,9 @@ if($result->num_rows >0)
   while($row=$result->fetch_assoc())
   {
     echo "-----------------------------------------------"."<br>";
-    echo "<strong>id:</strong> ".$row["commentid"]."<br>";
+    echo "<strong>id:</strong> ".$row["commentid"]. "
+    <strong> name: </strong>".$row['name']
+    ."<br>";
     echo $row['comment'];
     echo "<br>";
   }
@@ -63,7 +65,7 @@ if($result->num_rows >0)
 
  ?>
 
- <h4>To remove an comment enter the "id" and press remove</h4>
+ <h4>To remove a comment enter the "id" and press remove</h4>
 
  <!-- form -->
 

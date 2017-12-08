@@ -19,10 +19,10 @@ if(isset($_GET['order']))
   //do a whole lotta shit
   //These orders has to register somewhere
   //THE QUERY OF CHAMPIONS
-  // SELECT orders.id, orders.userID, orders_products.productID,
-  // orders_products.quantity, orders.price,
-  // orders.date FROM orders INNER JOIN
-  // orders_products ON orders_products.id = orders.id;
+  //  SELECT orders.id, orders.userID, orders_products.productID,
+  //  orders_products.quantity, orders.price,
+  //  orders.date FROM orders INNER JOIN
+  //  orders_products ON orders_products.id = orders.id;
   //THE QUERY OF CHAMPIONS
 
   //Remove items from respective databases and put in orders

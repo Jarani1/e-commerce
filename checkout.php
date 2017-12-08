@@ -69,7 +69,7 @@ if($result->num_rows >0)
   {
     $GLOBALS['price'] = $totprice;
     echo "<br>";
-    echo "TOTAL PRICE - ". $GLOBALS['price'];
+    echo "TOTAL PRICE - ". $GLOBALS['price']."$";
     $_SESSION['price'] = $GLOBALS['price'];
   }
 }else
