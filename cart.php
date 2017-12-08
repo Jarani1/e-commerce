@@ -12,6 +12,93 @@
 
 <h1> Shopping Cart  </h1>
 
+<?php
+//remove one from cart
+require "connectsql.php";
+if(isset($_GET['removeone']))
+{
+  $uid = $_SESSION['user'];
+  $removeid = $_GET['removeone'];
+  $sql_remove = "DELETE FROM cart WHERE userID='$uid' AND
+  productID = '$removeid'";
+
+   if($connect->query($sql_remove)==TRUE){
+     //echo "product removed";
+   }else{
+     echo "Error: ". $sql . "<br>" . $connect->error;
+   }
+}
+
+
+ ?>
+
+
+<?php
+//if edited add
+//add all cart id fields
+//make sure to only increment/subtract if <cart and >0
+require "connectsql.php";
+
+if(isset($_GET['id']))
+{
+  $idval = $_GET['id'];
+  $uid = $_SESSION['user'];
+  $pid = $_GET['prodid'];
+  $quant = $_GET['prodq'];
+  $dataq = 0;
+
+  //get product quantity
+
+  $sqlc = "SELECT quantity FROM products WHERE id = '$pid'";
+
+  //get prod for database
+  $resultc = $connect->query($sqlc);
+
+  if($resultc->num_rows >0)
+  {
+    while($row=$resultc->fetch_assoc())
+    {
+      //$GLOBALS['dquant'] = $row['quantity'];
+      $dataq = $row['quantity'];
+    }
+  }else
+  {
+    echo "Out of stock!";
+  }
+
+
+
+  if($quant<=$dataq && $quant>=0)
+  {
+
+      if($idval==1)
+      {
+        $sql_update = "UPDATE cart SET quantity=(quantity + '$idval') WHERE
+        cart.userID = '$uid' AND cart.productID = '$pid' ";
+        $connect->query($sql_update);
+
+      }
+      else if($idval==-1)
+      {
+        $sql_update1 = "UPDATE cart SET quantity=(quantity + '$idval') WHERE
+        cart.userID = '$uid' AND cart.productID = '$pid' ";
+        $connect->query($sql_update1);
+
+      }
+  }
+  else
+  {
+    echo "Out of stock!";
+    echo "<br>";
+  }
+}
+
+
+
+
+ ?>
+
+
 
 <?php
 require "connectsql.php";
@@ -37,6 +124,8 @@ Display cart
   -->
 <?php
 
+$oneplus = 1;
+$NOToneplus= -1;
 
 require "connectsql.php";
 if(isset($_SESSION['user']) && !(isset($_GET['remove'])))
@@ -75,6 +164,11 @@ if(isset($_SESSION['user']) && !(isset($_GET['remove'])))
       $qprice = $prodprice * $prodQ;
       echo "Name: ".$prodname." - quantity: ".$prodQ
       . " - total: ". $qprice."$" ;
+      echo "<a href='cart.php?prodq=". $prodQ ."&prodid=".$prodID ."&id=" . $oneplus ."'><strong> + </strong></a>";
+      echo " | ";
+      echo "<a href='cart.php?prodq=". $prodQ ."&prodid=".$prodID ."&id=" . $NOToneplus ."'><strong> - </strong></a>";
+      echo " ...";
+      echo "<a href='cart.php?removeone=". $prodID ."'> <strong>Remove</strong></a>";
       echo "<br>";
 
     }
